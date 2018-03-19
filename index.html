@@ -3,135 +3,82 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Rock Paper Scissors Part 2
-  </title>
-  <style>body{background-color: lightblue;}</style>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/images/ozzy.png">
+  <title>Rock Paper Scissors Batman Ozzy Lizard Spock</title>
 </head>
 
 <body>
 
-  <div id="game">
-
+  <header>
+    <h1>Rock, Paper, Scissors, Batman, Ozzy, Lizard, Spock</h1>
+    <!-- <h2>adapted from Big Bang Theory's five-option game</h2> -->
+  </header>
+  
+  <div class="weapon-wrap">
+    <img class="weapon pointer rock" src="assets/images/rock.png" alt="Rock Icon">
+    <img class="weapon pointer paper" src="assets/images/paper.png" alt="Paper Icon">
+    <img class="weapon pointer scissors" src="assets/images/scissors.png" alt="Scissors Icon">
+    <img class="weapon pointer batman" src="assets/images/batman.png" alt="Batman Icon">
+    <img class="weapon pointer ozzy" src="assets/images/ozzy.png" alt="Ozzy Icon">
+    <img class="weapon pointer lizard" src="assets/images/lizard.png" alt="Lizard Icon">
+    <img class="weapon pointer spock" src="assets/images/spock.png" alt="Spock Icon">
   </div>
 
-  <h4>Type 'r' for Rock</h4>
-  <h4>Type 'p' for Paper</h4>
-  <h4>Type 's' for Scissors</h4>
-  <h4>Type 'b' for Batman</h4>
-  <h4>Type 'o' for Ozzy</h4>
-  <h4>Type 'l' for Lizard</h4>
-  <h4>Type 'k' for Spock</h4>
+  <div class="main">
+    <div class="chosen-weapons">
+      <div class="p1-weapon">
+        <h4>You picked:</h4>
+        <img src="assets/images/qm.png" alt="Player 1's weapon">
+      </div>
+      <div class="p2-weapon">
+        <h4>Opponent picked:</h4>
+        <img src="assets/images/qm.png" alt="Player 2's weapon">
+      </div>
+    </div>					
+  </div>
 
+  <div id="connection-status">
+      <h2>Waiting for players...</h2>
+      <p>You may play against the computer while you wait!</p>
+  </div>
+
+  <form>
+    <h2>Get Logged In about it</h2>
+    First name: <input id="fname" type="text" name="fname"><br>
+    Last name: <input id="lname" type="text" name="lname"><br><br>
+    <input id="submit" type="submit" value="Let's Play!">
+  </form>
+
+  <div class="rules">
+    <h4>Need recap on the rules? <span class="pointer underline">Click here..</span></h4>
+    <img src="assets/images/rules.png" href="Rule Diagram" class="hide">
+  </div>
+
+  <div class="results">
+    <h5></h5>
+    <p class="score"></p>
+  </div>
+
+  <div class="shortcuts">
+    <h4>Rather play with your keyboard? <span class="pointer underline">Click here..</span></h4>
+    <div class="hide">
+      <h5>ctrl+R for Rock</h5>
+      <h5>ctrl+P for Paper</h5>
+      <h5>ctrl+S for Scissors</h5>
+      <h5>ctrl+B for Batman</h5>
+      <h5>ctrl+O for Ozzy</h5>
+      <h5>ctrl+L for Lizard</h5>
+      <h5>ctrl+K for Spock</h5>
+    </div>
+
+  </div>
+  
   <div id="results"></div>
 
-  <img src="assets/images/rock.png">
-  <img src="assets/images/paper.png">
-  <img src="assets/images/scissors.png">
-  <img src="assets/images/batman.png">
-  <img src="assets/images/ozzy.png">
-  <img src="assets/images/lizard.png">
-  <img src="assets/images/spock.png">
-  <img src="assets/images/rock2.png">
-  <img src="assets/images/paper2.png">
-  <img src="assets/images/scissors2.png">
-  <img src="assets/images/batman2.png">
-  <img src="assets/images/ozzy2.png">
-  <img src="assets/images/lizard2.png">
-  <img src="assets/images/spock2.png">
-
-  <script type="text/javascript">
-
-    var wins = 0;
-    var losses = 0;
-    var ties = 0;
-
-    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
-    var computerChoices = ["r", "p", "s", "b", "o", "l", "k"];
-
-    // This function is run whenever the user presses a key.
-    document.onkeyup = function(event) {
-
-      // Determines which key was pressed.
-      var userGuess = event.key;
-      if (userGuess == "r") {var userGuessLong = "rock";}
-      if (userGuess == "p") {var userGuessLong = "paper";}
-      if (userGuess == "s") {var userGuessLong = "scissors";}
-      if (userGuess == "b") {var userGuessLong = "batman";}
-      if (userGuess == "o") {var userGuessLong = "ozzy";}
-      if (userGuess == "l") {var userGuessLong = "lizard";}
-      if (userGuess == "k") {var userGuessLong = "spock";}
-
-      // Randomly chooses a choice from the options array. This is the Computer's guess.
-      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-      if (computerGuess == "r") {var computerGuessLong = "rock";}
-      if (computerGuess == "p") {var computerGuessLong = "paper";}
-      if (computerGuess == "s") {var computerGuessLong = "scissors";}
-      if (computerGuess == "b") {var computerGuessLong = "batman";}
-      if (computerGuess == "o") {var computerGuessLong = "ozzy";}
-      if (computerGuess == "l") {var computerGuessLong = "lizard";}
-      if (computerGuess == "k") {var computerGuessLong = "spock";}
-      
-      // Alerts the key the user pressed (userGuess).
-      alert("User guess: " + userGuessLong + ",  Computer guess: " + computerGuessLong);
-
-      if (computerGuess == userGuess) {alert("Tie!"); ties++;}
-
-      if (userGuess == "r" && computerGuess == "s") {alert("You Win! Rock smashes Scissors."); wins++;}
-      if (userGuess == "r" && computerGuess == "b") {alert("You Win! Rock crushes Batman."); wins++;}
-      if (userGuess == "r" && computerGuess == "l") {alert("You Win! Rock smashes Lizard."); wins++;}
-      if (userGuess == "r" && computerGuess == "p") {alert("You Lose! Paper covers Rock."); losses++;}
-      if (userGuess == "r" && computerGuess == "o") {alert("You Lose! Ozzy smokes Rock."); losses++;}
-      if (userGuess == "r" && computerGuess == "k") {alert("You Lose! Spock vaporizes Rock."); losses++;}
-
-      if (userGuess == "p" && computerGuess == "b") {alert("You Win! Paper (money) spoils Batman."); wins++;}
-      if (userGuess == "p" && computerGuess == "k") {alert("You Win! Paper disproves Spock."); wins++;}
-      if (userGuess == "p" && computerGuess == "r") {alert("You Win! Paper covers Rock."); wins++;} 
-      if (userGuess == "p" && computerGuess == "o") {alert("You Lose! Ozzy smokes Paper."); losses++;} 
-      if (userGuess == "p" && computerGuess == "s") {alert("You Lose! Scissors cuts Paper."); losses++;}
-      if (userGuess == "p" && computerGuess == "l") {alert("You Lose! Lizard eats Paper."); losses++;}
-
-      if (userGuess == "s" && computerGuess == "o") {alert("You Win! Scissors dehair Ozzy."); wins++;}
-      if (userGuess == "s" && computerGuess == "l") {alert("You Win! Scissors decapitates Lizard."); wins++;}
-      if (userGuess == "s" && computerGuess == "p") {alert("You Win! Scissors cuts paper."); wins++;} 
-      if (userGuess == "s" && computerGuess == "r") {alert("You Lose! Rock smashes Scissors."); losses++;}  
-      if (userGuess == "s" && computerGuess == "b") {alert("You Lose! Batman deflects Scissors."); losses++;}
-      if (userGuess == "s" && computerGuess == "k") {alert("You Lose! Spock smashes Scissors."); losses++;}
-
-      if (userGuess == "b" && computerGuess == "o") {alert("You Win! Batman decapitates (extracts revenge upon) Ozzy."); wins++;} 
-      if (userGuess == "b" && computerGuess == "k") {alert("You Win! Batman outvoices Spock."); wins++;} 
-      if (userGuess == "b" && computerGuess == "s") {alert("You Win! Batman deflects Scissors."); wins++;} 
-      if (userGuess == "b" && computerGuess == "l") {alert("You Lose! Lizard poisons Batman."); losses++;}
-      if (userGuess == "b" && computerGuess == "r") {alert("You Lose! Rock crushes Batman."); losses++;}
-      if (userGuess == "b" && computerGuess == "p") {alert("You Lose! Paper (money) spoils Batman."); losses++;}
-
-      if (userGuess == "o" && computerGuess == "l") {alert("You Win! Ozzy decapitates lizard."); wins++;}
-      if (userGuess == "o" && computerGuess == "r") {alert("You Win! Ozzy smokes Rock."); wins++;}
-      if (userGuess == "o" && computerGuess == "p") {alert("You Win! Ozzy smokes Paper."); wins++;} 
-      if (userGuess == "o" && computerGuess == "k") {alert("You Lose! Spock outsmarts Ozzy."); losses++;} 
-      if (userGuess == "o" && computerGuess == "s") {alert("You Lose! Scissors dehair Ozzy."); losses++;} 
-      if (userGuess == "o" && computerGuess == "b") {alert("You Lose! Batman decapitates (extracts revenge upon) Ozzy."); losses++;} 
-
-      if (userGuess == "l" && computerGuess == "p") {alert("You Win! Lizard eats Paper."); wins++;}
-      if (userGuess == "l" && computerGuess == "b") {alert("You Win! Lizard poisons Batman."); wins++;} 
-      if (userGuess == "l" && computerGuess == "k") {alert("You Win! Lizard poisons Spock."); wins++;}  
-      if (userGuess == "l" && computerGuess == "r") {alert("You Lose! Rock smashes Lizard."); losses++;}
-      if (userGuess == "l" && computerGuess == "s") {alert("You Lose! Scissors decapitate Lizard."); losses++;}
-      if (userGuess == "l" && computerGuess == "o") {alert("You Lose! Ozzy decapitates Lizard."); losses++;} 
-
-      if (userGuess == "k" && computerGuess == "r") {alert("You Win! Spock vaporizes Rock."); wins++;}
-      if (userGuess == "k" && computerGuess == "s") {alert("You Win! Spock smashes Scissors."); wins++;} 
-      if (userGuess == "k" && computerGuess == "o") {alert("You Win! Spock outsmarts Ozzy."); wins++;}  
-      if (userGuess == "k" && computerGuess == "p") {alert("You Lose! Paper disproves Spock."); losses++;}
-      if (userGuess == "k" && computerGuess == "b") {alert("You Lose! Batman outvoices Spock."); losses++;}
-      if (userGuess == "k" && computerGuess == "l") {alert("You Lose! Lizard poisons Spock."); losses++;} 
-
-
-      alert("Wins: " + wins + ",  Losses: " + losses + ",  Ties: " + ties);
-
-    };
-  </script>
-
-
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
 
 </body>
 

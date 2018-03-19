@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    font-family: "Helvetica", sans-serif; 
+}
+body {
+    margin: 0;
+    color: #225762;
+    text-align: center;
+}
+.hide {
+    display: none;
+}
+.pointer {
+    cursor: pointer; 
+}
+h1 {
+    margin: 0; 
+}
+header {
+    background: #225762;
+    color: white;
+    padding: 1rem; 
+}
+.underline {
+    text-decoration: underline; 
+}
+.rules img {
+    width: 20rem;
+}
+.weapon-wrap {
+    padding: 1rem;
+    background: #589595; 
+}
+.weapon-wrap .weapon {
+    width: 10rem;
+    margin: .5rem;
+}
+.p1-weapon, .p2-weapon {
+    position: absolute;
+}
+.p1-weapon {
+    left: 2rem;
+}
+.p2-weapon {
+    right: 2rem; 
+}
+.p1-weapon img, .p2-weapon img {
+    width: 9rem; 
+}
+      
+      
+@media screen and (max-width: 928px) {
+    .weapon {
+        width: 8rem !important;
+    }
+}
+@media screen and (max-width: 767px) {
+    h2 {
+        margin-bottom: 0;
+    }
+    .weapon {
+        width: 5rem !important;
+    }
+    .p1-weapon img, .p2-weapon img {
+    width: 6rem; 
+    }
+}
+@media screen and (max-width: 528px) {
+    .weapon {
+        width: 8rem !important;
+    }
+}
+@media screen and (max-width: 471px) {
+    .weapon {
+        width: 6rem !important;
+    }
+}
+@media screen and (max-width: 418px) {
+    .p1-weapon {
+        left: .5rem; }
+  
+    .p2-weapon {
+        right: .25rem; }
+}
