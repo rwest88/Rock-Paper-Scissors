@@ -55,6 +55,9 @@ database.ref("/players/").on("value", function(snapshot) {
                 $('#message1').text("waiting for opponent...");
                 $('#message2').text("Use this time to practice against the computer.");
             }, 3000);
+        } else {
+            opponent = player2;
+            $('#message1').text('Your opponent awaits!!!');
         }
     } else {
 		console.log("Player 2 does NOT exist");
