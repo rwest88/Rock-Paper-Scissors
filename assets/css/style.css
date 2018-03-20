@@ -158,8 +158,6 @@ header {
 }	
 
 @media screen and (max-width: 880px) {
-/* buttonwrap and header need fixing
-fight images and map needs fixing */
     h1 {
         font-size: 1.5rem;
     }
@@ -181,24 +179,29 @@ fight images and map needs fixing */
 @media screen and (max-width: 700px) {
 
 }
-/* 
-@media screen and (max-width: 528px) {
-	.weapon {
-		width: 8rem !important;
-	}
-}
 
 @media screen and (max-width: 471px) {
-	.weapon {
-		width: 6rem !important;
-	}
+    header, div.weapon-wrap {
+        padding: 10px;
+    }
+    div.weapon-wrap {
+        padding-bottom: 20px;
+    }
+    .weapon {
+        width: 5rem !important;
+        margin: 2px !important;
+        margin-bottom: -10px !important;
+    }
+    .rules img {
+        width: 22rem;
+    }
 }
 
-@media screen and (max-width: 418px) {
-	.p1-weapon img {
-      left: .5rem; 
+@media screen and (max-width: 320px) {
+    .weapon {
+        width: 4rem !important;
     }
-	.p2-weapon img {
-      right: .25rem; 
+    .rules img {
+        width: 20rem;
     }
-} */
+} 
