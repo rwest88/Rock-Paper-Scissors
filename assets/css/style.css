@@ -39,22 +39,47 @@ header {
     position: absolute;
 }
 .p1-weapon {
-    left: 2rem;
+    left: 10rem;
 }
 .p2-weapon {
-    right: 2rem; 
+    right: 10rem; 
 }
 .p1-weapon img, .p2-weapon img {
     width: 9rem; 
 }
       
+
+
+
+/* @media screen and (max-width: 600px) {
+    .weapon-wrap {
+        margin-bottom: 100px !important;
+    }
+    .rules {
+        margin-top: 100px;
+    }
+    header {
+        background: red !important;
+        color: white;
+        padding: 1rem; 
+    }
+} */
       
-@media screen and (max-width: 928px) {
+@media screen and (max-width: 1800px) {
     .weapon {
         width: 8rem !important;
     }
+    .p1-weapon {
+        left: 5rem !important;
+    }
+    .p2-weapon {
+        right: 5rem !important; 
+    }
+    header {
+        background: red !important;
+    }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
     h2 {
         margin-bottom: 0;
     }
@@ -64,21 +89,34 @@ header {
     .p1-weapon img, .p2-weapon img {
     width: 6rem; 
     }
+    header {
+        background: red !important;
+    }
 }
-@media screen and (max-width: 528px) {
+@media screen and (max-width: 900px) {
     .weapon {
         width: 8rem !important;
     }
+    header {
+        background: green !important;
+    }
 }
-@media screen and (max-width: 471px) {
+@media screen and (max-width: 600px) {
     .weapon {
         width: 6rem !important;
+    }
+    header {
+        background: orange !important;
     }
 }
 @media screen and (max-width: 418px) {
     .p1-weapon {
-        left: .5rem; }
-  
+        left: .5rem; 
+    }
     .p2-weapon {
-        right: .25rem; }
+        right: .25rem; 
+    }
+    header {
+        background: purple !important;
+    }
 }

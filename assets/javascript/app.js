@@ -28,6 +28,7 @@ function playerleaves() {}
 
 //// first we need to listen for any connected users and store or delete our local objects
 database.ref("/players/").on("value", function(snapshot) {
+    
 	// Check for existence of player 1 in the database
 	if (snapshot.child("player1").exists()) {
 		console.log("Player 1 exists");
