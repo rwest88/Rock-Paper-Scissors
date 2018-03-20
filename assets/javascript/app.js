@@ -12,13 +12,12 @@ var database = firebase.database();
 
 var player1 = null;
 var player2 = null;
-var player1Name = null;
-var player2Name = null;
-var userName;
-var displayName;
-var turn = 1;
+var userName = null;
 
-var user;
+var user = null;
+var opponent = null;
+var computerEnabled = true;
+var countEnabled = true;
 
 //// first we need to listen for any connected users and store or delete our local objects
 database.ref("/players/").on("value", function(snapshot) {
@@ -29,37 +28,70 @@ database.ref("/players/").on("value", function(snapshot) {
 
 		// Record player1 data
 		player1 = snapshot.val().player1;
-		player1Name = player1.name;
+        if (userName == player1.name && userName !== null) {
+            user = player1;
+            $('#user').text(user.displayName);
+            setTimeout(function() {
+                $('#message1').text("waiting for opponent...");
+                $('#message2').text("Use this time to practice against the computer.");
+            }, 3000);
+        } else {
+            opponent = player1;
+            $('#message1').text('Your opponent awaits!!!');
+        }
     } else {
 		console.log("Player 1 does NOT exist");
-
 		player1 = null;
-        player1Name = "";
     }
     if (snapshot.child("player2").exists()) {
 		console.log("Player 2 exists");
 
 		// Record player2 data
 		player2 = snapshot.val().player2;
-        player2Name = player2.name;
+        if (userName = player2.name && userName !== null) {
+            user = player2;
+            $('#user').text(user.displayName);
+            setTimeout(function() {
+                $('#message1').text("waiting for opponent...");
+                $('#message2').text("Use this time to practice against the computer.");
+            }, 3000);
+        }
     } else {
 		console.log("Player 2 does NOT exist");
-
 		player2 = null;
-		player2Name = "";
+    }
+    if (snapshot.child("player1").exists() && snapshot.child("player2").exists()) {
+        $('#message1').text('time to game.');
+        $('#message2').text('Get ready!');
+        countItOff();
     }
 });
 
-// Attach a listener to the database /turn/ node to listen for any changes
-
-//once("value", snapshot => snapshot.forEach(child => console.log(child.val()))
-
-// database.ref().on("value", function(snapshot) {
-//     console.log(snapshot.val().logins);
-//     logins = snapshot.val().logins;
-// });
-
-////////////////////////////
+function countItOff() {
+    if (countEnabled) {
+        countEnabled = false;
+        setTimeout(function() {
+            $('#message1').text('rock...');
+            $('#message2').text('Fuck it up!');
+        }, 3000);
+        setTimeout(function() {
+            $('#message1').text('rock...');
+        },3333);
+        setTimeout(function() {
+            $('#message1').text('paper...');
+        },3666);
+        setTimeout(function() {
+            $('#message1').text('scissors...');
+        },4000);
+        setTimeout(function() {
+            $('#message1').text('(batman ozzy lizard spock)');
+        },4333);
+        setTimeout(function() {
+            $('#message1').text('SHOOT!');
+            $('#message2').text('Oh baby!');
+        },4888);
+    }
+}
 
 $('#submit').click(function() {
 
@@ -92,15 +124,14 @@ $('#submit').click(function() {
             // check if the user has played before and retrieve his/her data
             database.ref('/users/').once('value').then(function(snapshot) {
                 if (snapshot.child(userName).exists()) {
-                    console.log("welcome back");
-                    console.log(snapshot.child(userName + "/globalWins").val());
-                    player1.globalWins = snapshot.child(userName + "/globalWins").val();
-                    player1.globalLosses = snapshot.child(userName + "/globalWins").val();
+                    $('#message1').text("Welcome back, " + userName + ".");
+                    $('#message2').text("We missed you bud!");
+                    console.log(snapshot.child(userName).val());
+                    player1 = snapshot.child(userName).val();
                 }
                 // set updated player stats to database
                 database.ref().child("/players/player1").set(player1);
                 database.ref().child("/users/" + userName).set(player1);
-                database.ref().child("/turn/").set(1);
             });
 
             // if user disconnects, remove player
@@ -131,22 +162,22 @@ $('#submit').click(function() {
             // check if the user has played before and retrieve his/her data
             database.ref('/users/').once('value').then(function(snapshot) {
                 if (snapshot.child(userName).exists()) {
-                    console.log("welcome back");
-                    console.log(snapshot.child(userName + "/globalWins").val());
-                    player2.globalWins = snapshot.child(userName + "/globalWins").val();
-                    player2.globalLosses = snapshot.child(userName + "/globalWins").val();
+                    $('#message1').text("Welcome back, " + userName + ".");
+                    $('#message2').text("We missed you bud!");
+                    console.log(snapshot.child(userName).val());
+                    player2 = snapshot.child(userName).val();
                 }
                 // set updated player stats to database
                 database.ref().child("/players/player2").set(player2);
                 database.ref().child("/users/" + userName).set(player2);
-                database.ref().child("/turn/").set(1);
             });
 
             // if user disconnects, remove player
             database.ref("/players/player2").onDisconnect().remove();
         }
-        $('form').addClass("hide");
-        $('#play-computer').removeClass("hide");
+
+        $('form').addClass("invisible");
+        $('#message2').removeClass("hide");
     }
 
 });
