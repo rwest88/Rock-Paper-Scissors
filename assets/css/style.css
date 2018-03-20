@@ -30,6 +30,9 @@ header {
 .weapon-wrap {
     padding: 1rem;
     background: #589595; 
+    @include for-phone-only {
+        background: red;
+    }
 }
 .weapon-wrap .weapon {
     width: 10rem;
@@ -47,9 +50,6 @@ header {
 .p1-weapon img, .p2-weapon img {
     width: 9rem; 
 }
-      
-
-
 
 /* @media screen and (max-width: 600px) {
     .weapon-wrap {
@@ -65,7 +65,7 @@ header {
     }
 } */
       
-@media screen and (max-width: 1800px) {
+/* @media screen and (max-width: 1800px) {
     .weapon {
         width: 8rem !important;
     }
@@ -119,4 +119,4 @@ header {
     header {
         background: purple !important;
     }
-}
+} */
