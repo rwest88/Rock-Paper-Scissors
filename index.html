@@ -30,23 +30,23 @@
   <div class="main">
     <div class="chosen-weapons">
       <div class="p1-weapon">
-        <h4>You picked:</h4>
+        <h4>You:</h4>
         <img src="assets/images/qm.png" alt="Player 1's weapon">
       </div>
       <div class="p2-weapon">
-        <h4>Opponent picked:</h4>
+        <h4>Computer:</h4>
         <img src="assets/images/qm.png" alt="Player 2's weapon">
       </div>
-    </div>					
+    </div>
   </div>
 
   <div id="connection-status">
-      <h2>Waiting for players...</h2>
-      <p>You may play against the computer while you wait!</p>
+      <h2>waiting for players...</h2> <!-- i want to animate this -->
+      <p id="play-computer" class="hide">You may play against the computer while you wait!</p>
   </div>
 
   <form>
-    <h2>Get Logged In about it</h2>
+    <h3>get logged in about it</h3>
     First name: <input id="fname" type="text" name="fname"><br>
     Last name: <input id="lname" type="text" name="lname"><br><br>
     <input id="submit" type="submit" value="Let's Play!">
@@ -60,7 +60,7 @@
   <div class="rules">
     <h4>Need recap on the rules? <span id="rules-link" class="pointer underline">Click here..</span></h4>
     <img src="assets/images/rules.png" href="Rule Diagram" class="hide">
-    <h4>Rather play with your keyboard? <span id="keybd-shortcuts-link" class="pointer underline">Click here..</span></h4>
+    <h4 id="keybd">Rather play with your keyboard? <span id="keybd-shortcuts-link" class="pointer underline">Click here..</span></h4>
     <div id="keybd-shortcuts" class="hide">
       <h5>ctrl+R for Rock</h5>
       <h5>ctrl+P for Paper</h5>
@@ -69,12 +69,6 @@
       <h5>ctrl+O for Ozzy</h5>
       <h5>ctrl+L for Lizard</h5>
       <h5>ctrl+K for Spock</h5>
-  </div>
-
-  <div class="shortcuts">
-
-    </div>
-
   </div>
   
   <div id="results"></div>

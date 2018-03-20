@@ -10,8 +10,6 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-
-
 var player1 = null;
 var player2 = null;
 var player1Name = null;
@@ -21,10 +19,6 @@ var displayName;
 var turn = 1;
 
 var user;
-
-function whoseturnisit() {}
-function playerleaves() {}
-
 
 //// first we need to listen for any connected users and store or delete our local objects
 database.ref("/players/").on("value", function(snapshot) {
@@ -152,6 +146,7 @@ $('#submit').click(function() {
             database.ref("/players/player2").onDisconnect().remove();
         }
         $('form').addClass("hide");
+        $('#play-computer').removeClass("hide");
     }
 
 });

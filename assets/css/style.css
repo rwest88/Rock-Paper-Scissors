@@ -47,6 +47,20 @@ header {
 .p1-weapon img, .p2-weapon img {
     width: 15rem; 
 }
+form {
+    background: #589595; 
+    color: white;
+    padding-top: 1px;
+    padding-bottom: 1rem;
+    max-width: 36%;
+    position: relative;
+    left: 32%;
+    margin-top: 20px;
+}
+form h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 
 /* @media screen and (max-width: 600px) {
     .weapon-wrap {
@@ -177,7 +191,7 @@ header {
 }
 
 @media screen and (max-width: 700px) {
-
+    /* 400-700 is broke. not a priority, hehe */
 }
 
 @media screen and (max-width: 471px) {
@@ -192,12 +206,47 @@ header {
         margin: 2px !important;
         margin-bottom: -10px !important;
     }
+    .p1-weapon, .p2-weapon {
+        position: inherit;
+        float: left;
+        margin: 0;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .p2-weapon {
+        float: right;
+        margin-right: 10px;
+    }
+    form {
+        max-width: 100%;
+        left: 0;
+        margin-top: 10px;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    h4 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .rules {
+        top: 40px;
+    }
     .rules img {
         width: 22rem;
+    }
+    .rules h4#keybd {
+        display: none;
     }
 }
 
 @media screen and (max-width: 320px) {
+    .p1-weapon img, .p2-weapon img {
+        width: 8rem;
+    }
     .weapon {
         width: 4rem !important;
     }
