@@ -1,54 +1,53 @@
-
 @media screen and (max-width: 1291px) {
 	.weapon {
 		width: 8rem !important;
     }
     .p1-weapon {
-        left: 6rem;
+      left: 6rem;
     }
     .p2-weapon {
-        right: 6rem; 
+      right: 6rem; 
     }
     .p1-weapon img, .p2-weapon img {
-        width: 14rem; 
+      width: 14rem; 
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .p1-weapon {
-        left: 5rem;
-    }
-    .p2-weapon {
-        right: 5rem; 
-    }
+  .p1-weapon {
+    left: 5rem;
+  }
+  .p2-weapon {
+    right: 5rem; 
+  }
 }
 
 @media screen and (max-width: 1067px) {
 	.weapon {
 		width: 6rem !important;
 	}
-    .p1-weapon img, .p2-weapon img {
-        width: 10rem; 
-    }
+  .p1-weapon img, .p2-weapon img {
+    width: 10rem; 
+  }
 }	
 
 @media screen and (max-width: 880px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    .weapon {
-		width: 9rem !important;
-    }
-    .p1-weapon, .p2-weapon {
-        margin-top: 6rem;
-    }
-    .p1-weapon img, .p2-weapon img {
-        width: 10rem; 
-    }
-    .rules {
-        position: relative;
-        top: 100px;
-    }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .weapon {
+    width: 9rem !important;
+  }
+  .p1-weapon, .p2-weapon {
+    margin-top: 6rem;
+  }
+  .p1-weapon img, .p2-weapon img {
+    width: 10rem; 
+  }
+  .rules {
+    position: relative;
+    top: 100px;
+  }
 }
 /* 472-700 is broke. not a priority, hehe */
 @media screen and (max-width: 700px) {
@@ -56,93 +55,93 @@
 }
 /* iphone 6/7/8, 6/7/8 Plus */
 @media screen and (max-width: 471px) {
-    header, div.weapon-wrap {
-        padding: 10px;
-    }
-    div.weapon-wrap {
-        padding-bottom: 20px;
-    }
-    .weapon {
-        width: 5rem !important;
-        margin: 2px !important;
-        margin-bottom: -10px !important;
-    }
-    .p1-weapon, .p2-weapon {
-        position: inherit;
-        float: left;
-        margin: 0;
-        margin-left: 10px;
-        margin-bottom: 10px;
-    }
-    .p2-weapon {
-        float: right;
-        margin-right: 10px;
-    }
-    form {
-        max-width: 100%;
-        left: 0;
-        margin-top: 10px;
-    }
-    .invisible {
-        display: none;
-    }
-    h2 {
-        clear: both;
-        font-size: 1rem;
-    }
-    h3 {
-        font-size: 1rem;
-    }
-    h4 {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    .rules {
-        top: 10px;
-    }
-    .rules img {
-        width: 22rem;
-    }
-    #rules {
-        margin-bottom: 20px;
-    }
-    .rules h4#keybd {
-        display: none;
-    }
+  header, div.weapon-wrap {
+    padding: 10px;
+  }
+  div.weapon-wrap {
+    padding-bottom: 20px;
+  }
+  .weapon {
+    width: 5rem !important;
+    margin: 2px !important;
+    margin-bottom: -10px !important;
+  }
+  .p1-weapon, .p2-weapon {
+    position: inherit;
+    float: left;
+    margin: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .p2-weapon {
+    float: right;
+    margin-right: 10px;
+  }
+  form {
+    max-width: 100%;
+    left: 0;
+    margin-top: 10px;
+  }
+  .invisible {
+    display: none;
+  }
+  h2 {
+    clear: both;
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .rules {
+    top: 10px;
+  }
+  .rules img {
+    width: 22rem;
+  }
+  #rules {
+    margin-bottom: 20px;
+  }
+  .rules h4#keybd {
+    display: none;
+  }
 }
 /* samsung */
 @media screen and (max-width: 369px) {
-    .weapon {
-        width: 4.6rem !important;
-    }
-    .p1-weapon img, .p2-weapon img {
-        width: 9.5rem;
-    }
+  .weapon {
+    width: 4.6rem !important;
+  }
+  .p1-weapon img, .p2-weapon img {
+    width: 9.5rem;
+  }
 }
 
 @media screen and (max-width: 345px) {
-    h1 {
-        font-size: 22px;
-    }
-    .weapon {
-        width: 4.2rem !important;
-    }
-    .p1-weapon img, .p2-weapon img {
-        width: 9rem;
-    }
-    .rules img {
-        width: 20rem;
-    }
+  h1 {
+    font-size: 22px;
+  }
+  .weapon {
+    width: 4.2rem !important;
+  }
+  .p1-weapon img, .p2-weapon img {
+    width: 9rem;
+  }
+  .rules img {
+    width: 20rem;
+  }
 }
 
 @media screen and (max-width: 320px) {
-    .p1-weapon img, .p2-weapon img {
-        width: 8rem;
-    }
-    .weapon {
-        width: 4rem !important;
-    }
-    .rules img {
-        width: 20rem;
-    }
+  .p1-weapon img, .p2-weapon img {
+    width: 8rem;
+  }
+  .weapon {
+    width: 4rem !important;
+  }
+  .rules img {
+    width: 20rem;
+  }
 } 

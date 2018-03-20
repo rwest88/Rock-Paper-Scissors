@@ -1,77 +1,77 @@
 * {
-    box-sizing: border-box;
-    font-family: "Helvetica", sans-serif; 
+  box-sizing: border-box;
+  font-family: "Helvetica", sans-serif; 
 }
 body {
-    margin: 0;
-    color: #225762;
-    text-align: center;
+  margin: 0;
+  color: #225762;
+  text-align: center;
 }
 /* #message2 {
-    background: #589595;
-    padding: 5px;
-    color: white;
+  background: #589595;
+  padding: 5px;
+  color: white;
 } */
 .hide {
-    display: none !important;
+  display: none !important;
 }
 .invisible {
-    visibility: hidden;
-    height: 114px;
+  visibility: hidden;
+  height: 114px;
 }
 .pointer {
-    cursor: pointer; 
+  cursor: pointer; 
 }
 h1 {
-    margin: 0; 
+  margin: 0; 
 }
 header {
-    background: #225762;
-    color: white;
-    padding: 1rem; 
+  background: #225762;
+  color: white;
+  padding: 1rem; 
 }
 .underline {
-    text-decoration: underline; 
+  text-decoration: underline; 
 }
 .rules img {
-    width: 25rem;
+  width: 25rem;
 }
 .weapon-wrap {
-    padding: 1rem;
-    background: #589595; 
+  padding: 1rem;
+  background: #589595; 
 }
 .weapon-wrap .weapon {
-    width: 10rem;
-    margin: .5rem;
+  width: 10rem;
+  margin: .5rem;
 }
 .p1-weapon, .p2-weapon {
-    position: absolute;
+  position: absolute;
 }
 .p1-weapon {
-    left: 8rem;
+  left: 8rem;
 }
 .p2-weapon {
-    right: 8rem; 
+  right: 8rem; 
 }
 .p1-weapon img, .p2-weapon img {
-    width: 15rem; 
+  width: 15rem; 
 }
 form {
-    background: #589595; 
-    color: white;
-    padding-top: 1px;
-    padding-bottom: 1rem;
-    max-width: 36%;
-    position: relative;
-    left: 32%;
-    margin-top: 20px;
+  background: #589595; 
+  color: white;
+  padding-top: 1px;
+  padding-bottom: 1rem;
+  max-width: 36%;
+  position: relative;
+  left: 32%;
+  margin-top: 20px;
 }
 form h3 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 footer {
-    background: #225762;
-    color: white;
-    padding: .5rem;
+  background: #225762;
+  color: white;
+  padding: .5rem;
 }
