@@ -25,14 +25,11 @@ header {
     text-decoration: underline; 
 }
 .rules img {
-    width: 20rem;
+    width: 25rem;
 }
 .weapon-wrap {
     padding: 1rem;
     background: #589595; 
-    @include for-phone-only {
-        background: red;
-    }
 }
 .weapon-wrap .weapon {
     width: 10rem;
@@ -42,13 +39,13 @@ header {
     position: absolute;
 }
 .p1-weapon {
-    left: 10rem;
+    left: 8rem;
 }
 .p2-weapon {
-    right: 10rem; 
+    right: 8rem; 
 }
 .p1-weapon img, .p2-weapon img {
-    width: 9rem; 
+    width: 15rem; 
 }
 
 /* @media screen and (max-width: 600px) {
@@ -118,5 +115,90 @@ header {
     }
     header {
         background: purple !important;
+    }
+} */
+
+
+
+
+@media screen and (max-width: 1291px) {
+	.weapon {
+		width: 8rem !important;
+    }
+    .p1-weapon {
+        left: 6rem;
+    }
+    .p2-weapon {
+        right: 6rem; 
+    }
+    .p1-weapon img, .p2-weapon img {
+        width: 14rem; 
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .p1-weapon {
+        left: 5rem;
+    }
+    .p2-weapon {
+        right: 5rem; 
+    }
+}
+
+@media screen and (max-width: 1067px) {
+	h2 {
+        margin-bottom: 0;
+	}
+	.weapon {
+		width: 6rem !important;
+	}
+    .p1-weapon img, .p2-weapon img {
+        width: 10rem; 
+    }
+}	
+
+@media screen and (max-width: 880px) {
+/* buttonwrap and header need fixing
+fight images and map needs fixing */
+    h1 {
+        font-size: 1.5rem;
+    }
+    .weapon {
+		width: 9rem !important;
+    }
+    .p1-weapon, .p2-weapon {
+        margin-top: 6rem;
+    }
+    .p1-weapon img, .p2-weapon img {
+        width: 10rem; 
+    }
+    .rules {
+        position: relative;
+        top: 100px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+}
+/* 
+@media screen and (max-width: 528px) {
+	.weapon {
+		width: 8rem !important;
+	}
+}
+
+@media screen and (max-width: 471px) {
+	.weapon {
+		width: 6rem !important;
+	}
+}
+
+@media screen and (max-width: 418px) {
+	.p1-weapon img {
+      left: .5rem; 
+    }
+	.p2-weapon img {
+      right: .25rem; 
     }
 } */
