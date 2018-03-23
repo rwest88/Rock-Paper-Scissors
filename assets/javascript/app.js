@@ -428,6 +428,10 @@ $('.weapon').click(function() {
         if (computerGuess == "b") {$('#message1').text("You Lose! Batman outvoices Spock."); user.compWins++;}
         if (computerGuess == "l") {$('#message1').text("You Lose! Lizard poisons Spock."); user.compWins++;} 
       }
+      
+      $('#user').text(`${user.displayName}: ${user.winsVScomp}`);
+      $('#opponent').text(`Computer: ${user.compWins}`);
+
       setTimeout(function() {
         if (user.player == "1") {
           database.ref().child("/players/player1").set(user); //this works
