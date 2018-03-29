@@ -28,11 +28,12 @@ var opponent = null;
 var p1onceExisted = false;
 var p2onceExisted = false;
 var inFirst = "";
-var computerEnabled = false;
+
 var countEnabled = true;
 var buttonsEnabled = false;
 var multiplayerEnabled = false;
-
+var computerEnabled = false;
+var computerGuess = "";
 
 var battle = new Audio('assets/audio/ninja.mp3');
 
@@ -82,9 +83,8 @@ database.ref("/players/").on("value", function(snapshot) {
     }
   } else {                                           //// if player 1 does NOT exist ////
     console.log("Player 1 does NOT exist");
-    player1 = null; // this is key
+    player1 = null; // this is key for login order
     multiplayerEnabled = false;
-    countEnabled = true;
     if (p1onceExisted) {
       if (!computerEnabled) {
         $('#message1').text("Opponent has disconnected!");
@@ -138,9 +138,8 @@ database.ref("/players/").on("value", function(snapshot) {
     }
   } else {                                             //// if player 2 does NOT exist ////
     console.log("Player 2 does NOT exist");
-    player2 = null; // this is key
+    player2 = null; // this is key for login order
     multiplayerEnabled = false;
-    countEnabled = true;
     if (p2onceExisted) {
       if (!computerEnabled) {
         $('#message1').text("Opponent has disconnected!");
@@ -167,18 +166,18 @@ database.ref("/players/").on("value", function(snapshot) {
       }
       computerEnabled = false;
       buttonsEnabled = false;
+      countEnabled = true;
       $('.weapon').removeClass('pointer');
       $('.p1-weapon img').attr('src', "assets/images/qm.png");
       $('.p2-weapon img').attr('src', "assets/images/qm.png");
       $('#user').text(`${user.displayName}: ${user.wins}`).addClass('pointer');
       $('#opponent').text(`${opponent.displayName}: ${opponent.wins}`).addClass('pointer');
-      user.wins = 0;
-      user.choice = "";
-      if (user.player == "1") {
-        database.ref().child("/players/player1").set(user);
-      } else {
-        database.ref().child("/players/player2").set(user);
-      }
+      // user.choice = "";
+      // if (user.player == "1") {
+      //   database.ref().child("/players/player1").set(user);
+      // } else {
+      //   database.ref().child("/players/player2").set(user);
+      // }
       setTimeout(function() {
         battle.play();
         $('#message1').text('time to game.');
@@ -189,14 +188,16 @@ database.ref("/players/").on("value", function(snapshot) {
     $('#opponent').text(`${opponent.displayName}: ${opponent.wins}`);
     if (user.choice !== "" && opponent.choice !== "") {
       console.log("super cool");
-      compare();
+      compareMulti();
     }
     setTimeout(countItOff, 5000);
   }
 
-  // if neither players exist                                                    ///////
+  // if no players exist                                                    ///////
   if (!(snapshot.child("player1").exists() || snapshot.child("player2").exists())) {
     buttonsEnabled = false;
+    p1onceExisted = false;
+    p2onceExisted = false;
     console.log('Neither player exists');
     $('.weapon').removeClass('pointer');
     setTimeout(function() {
@@ -207,42 +208,6 @@ database.ref("/players/").on("value", function(snapshot) {
     }, 3000);
   }
 });
-
-//...............................
-//
-// Count down for each round
-//
-//...............................
-
-function countItOff() {
-  if (countEnabled) {
-    countEnabled = false;
-    $('.p1-weapon img').attr('src', "assets/images/qm.png");
-    $('.p2-weapon img').attr('src', "assets/images/qm.png");
-    setTimeout(function() {
-      $('#message1').text('rock...');
-      $('#message2').text('Fuck it up!');
-    }, 3000);
-    setTimeout(function() {
-      $('#message1').text('rock...');
-    }, 3333);
-    setTimeout(function() {
-      $('#message1').text('paper...');
-    }, 3666);
-    setTimeout(function() {
-      $('#message1').text('scissors...');
-    }, 4000);
-    setTimeout(function() {
-      $('#message1').text('(batman ozzy lizard spock)');
-    }, 4333);
-    setTimeout(function() {
-      $('#message1').text('SHOOT!');
-      $('#message2').text('Oh baby!');
-      buttonsEnabled = true;
-      $('.weapon').addClass('pointer');
-    }, 4888);
-  }
-}
 
 //.........................................
 //
@@ -291,6 +256,7 @@ $('#submit').click(function() {
           $('#message2').text("We missed you bud!");
           console.log(snapshot.child(userName).val());
           player1 = snapshot.child(userName).val();
+          player1.wins = 0; player1.losses = 0; player1.choice = "";
         } else {
           $('#message1').text("Hi, " + userName + ".");
           $('#message2').text("Thank you for joining!");
@@ -333,6 +299,7 @@ $('#submit').click(function() {
           $('#message2').text("We missed you bud!");
           console.log(snapshot.child(userName).val());
           player2 = snapshot.child(userName).val();
+          player2.wins = 0; player2.losses = 0; player2.choice = "";
         } else {
           $('#message1').text("Hi, " + userName + ".");
           $('#message2').text("Thank you for joining!");
@@ -412,88 +379,8 @@ $('.weapon').click(function() {
       }
 
     } else if (computerEnabled) {
-      var computerChoices = ["r", "p", "s", "b", "o", "l", "k"];
-      var computerGuess = computerChoices[Math.floor(Math.random() * 7)];
-      // $(`[data-key="${computerGuess}"]`).attr('src')
-      $('.p2-weapon img').attr('src', $(`[data-key=${computerGuess}]`).attr('src'));
-      console.log(computerGuess);
-      if (computerGuess == user.choice) {$('#message1').text("Tie!");}
+      compareComputer();
 
-      if (user.choice == "r") {user.rock++;
-        if (computerGuess == "s") {$('#message1').text("You Win! Rock smashes Scissors."); user.winsVScomp++;}
-        if (computerGuess == "b") {$('#message1').text("You Win! Rock crushes Batman."); user.winsVScomp++;}
-        if (computerGuess == "l") {$('#message1').text("You Win! Rock smashes Lizard."); user.winsVScomp++;}
-        if (computerGuess == "p") {$('#message1').text("You Lose! Paper covers Rock."); user.compWins++;}
-        if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy smokes Rock."); user.compWins++;}
-        if (computerGuess == "k") {$('#message1').text("You Lose! Spock vaporizes Rock."); user.compWins++;}
-      }
-
-      if (user.choice == "p") {user.paper++;
-        if (computerGuess == "b") {$('#message1').text("You Win! Paper (money) spoils Batman."); user.winsVScomp++;}
-        if (computerGuess == "k") {$('#message1').text("You Win! Paper disproves Spock."); user.winsVScomp++;}
-        if (computerGuess == "r") {$('#message1').text("You Win! Paper covers Rock."); user.winsVScomp++;} 
-        if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy smokes Paper."); user.compWins++;} 
-        if (computerGuess == "s") {$('#message1').text("You Lose! Scissors cuts Paper."); user.compWins++;}
-        if (computerGuess == "l") {$('#message1').text("You Lose! Lizard eats Paper."); user.compWins++;}
-      }
-
-      if (user.choice == "s") {user.scissors++;
-        if (computerGuess == "o") {$('#message1').text("You Win! Scissors dehair Ozzy."); user.winsVScomp++;}
-        if (computerGuess == "l") {$('#message1').text("You Win! Scissors decapitates Lizard."); user.winsVScomp++;}
-        if (computerGuess == "p") {$('#message1').text("You Win! Scissors cuts paper."); user.winsVScomp++;} 
-        if (computerGuess == "r") {$('#message1').text("You Lose! Rock smashes Scissors."); user.compWins++;}  
-        if (computerGuess == "b") {$('#message1').text("You Lose! Batman deflects Scissors."); user.compWins++;}
-        if (computerGuess == "k") {$('#message1').text("You Lose! Spock smashes Scissors."); user.compWins++;}
-      }
-
-      if (user.choice == "b") {user.batman++;
-        if (computerGuess == "o") {$('#message1').text("You Win! Batman decapitates Ozzy."); user.winsVScomp++;} 
-        if (computerGuess == "k") {$('#message1').text("You Win! Batman outvoices Spock."); user.winsVScomp++;} 
-        if (computerGuess == "s") {$('#message1').text("You Win! Batman deflects Scissors."); user.winsVScomp++;} 
-        if (computerGuess == "l") {$('#message1').text("You Lose! Lizard poisons Batman."); user.compWins++;}
-        if (computerGuess == "r") {$('#message1').text("You Lose! Rock crushes Batman."); user.compWins++;}
-        if (computerGuess == "p") {$('#message1').text("You Lose! Paper (money) spoils Batman."); user.compWins++;}
-      }
-
-      if (user.choice == "o") {user.ozzy++;
-        if (computerGuess == "l") {$('#message1').text("You Win! Ozzy decapitates lizard."); user.winsVScomp++;}
-        if (computerGuess == "r") {$('#message1').text("You Win! Ozzy smokes Rock."); user.winsVScomp++;}
-        if (computerGuess == "p") {$('#message1').text("You Win! Ozzy smokes Paper."); user.winsVScomp++;} 
-        if (computerGuess == "k") {$('#message1').text("You Lose! Spock outsmarts Ozzy."); user.compWins++;} 
-        if (computerGuess == "s") {$('#message1').text("You Lose! Scissors dehair Ozzy."); user.compWins++;} 
-        if (computerGuess == "b") {$('#message1').text("You Lose! Batman decapitates Ozzy."); user.compWins++;} 
-      }
-
-      if (user.choice == "l") {user.lizard++;
-        if (computerGuess == "p") {$('#message1').text("You Win! Lizard eats Paper."); user.winsVScomp++;}
-        if (computerGuess == "b") {$('#message1').text("You Win! Lizard poisons Batman."); user.winsVScomp++;} 
-        if (computerGuess == "k") {$('#message1').text("You Win! Lizard poisons Spock."); user.winsVScomp++;}  
-        if (computerGuess == "r") {$('#message1').text("You Lose! Rock smashes Lizard."); user.compWins++;}
-        if (computerGuess == "s") {$('#message1').text("You Lose! Scissors decapitate Lizard."); user.compWins++;}
-        if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy decapitates Lizard."); user.compWins++;} 
-      }
-
-      if (user.choice == "k") {user.spock++;
-        if (computerGuess == "r") {$('#message1').text("You Win! Spock vaporizes Rock."); user.winsVScomp++;}
-        if (computerGuess == "s") {$('#message1').text("You Win! Spock smashes Scissors."); user.winsVScomp++;} 
-        if (computerGuess == "o") {$('#message1').text("You Win! Spock outsmarts Ozzy."); user.winsVScomp++;}  
-        if (computerGuess == "p") {$('#message1').text("You Lose! Paper disproves Spock."); user.compWins++;}
-        if (computerGuess == "b") {$('#message1').text("You Lose! Batman outvoices Spock."); user.compWins++;}
-        if (computerGuess == "l") {$('#message1').text("You Lose! Lizard poisons Spock."); user.compWins++;} 
-      }
-
-      $('#user').text(`${user.displayName}: ${user.winsVScomp}`);
-      $('#opponent').text(`Computer: ${user.compWins}`);
-
-      setTimeout(function() {
-        if (user.player == "1") {
-          database.ref().child("/players/player1").set(user);
-          //.once should go here for opponent
-        } else {
-          database.ref().child("/players/player2").set(user);
-        }
-      }, 4000);
-      database.ref().child("/users/" + user.name).set(user);
     } else {
       console.log('error!');
     }
@@ -514,7 +401,139 @@ document.onkeydown = function(e) {
 
 };
 
-function compare() {
+//.............................................
+//
+// More Functions
+//
+//.............................................
+
+//.............................................
+// Countdown for each multiplayer round
+//.............................................
+
+function countItOff() {
+  if (countEnabled) {
+    countEnabled = false;
+    $('.p1-weapon img').attr('src', "assets/images/qm.png");
+    $('.p2-weapon img').attr('src', "assets/images/qm.png");
+    setTimeout(function() {
+      $('#message1').text('rock...');
+      $('#message2').text('Fuck it up!');
+    }, 3000);
+    setTimeout(function() {
+      $('#message1').text('rock...');
+    }, 3333);
+    setTimeout(function() {
+      $('#message1').text('paper...');
+    }, 3666);
+    setTimeout(function() {
+      $('#message1').text('scissors...');
+    }, 4000);
+    setTimeout(function() {
+      $('#message1').text('(batman ozzy lizard spock)');
+    }, 4333);
+    setTimeout(function() {
+      $('#message1').text('SHOOT!');
+      $('#message2').text('Oh baby!');
+      buttonsEnabled = true;
+      $('.weapon').addClass('pointer');
+    }, 4888);
+  }
+}
+
+//.................................................
+// Comparison for Computer Mode
+//.................................................
+
+function compareComputer() {
+  var computerChoices = ["r", "p", "s", "b", "o", "l", "k"];
+  computerGuess = computerChoices[Math.floor(Math.random() * 7)];
+  $('.p2-weapon img').attr('src', $(`[data-key=${computerGuess}]`).attr('src'));
+  console.log(computerGuess);
+  if (computerGuess == user.choice) {$('#message1').text("Tie!");}
+
+  if (user.choice == "r") {user.rock++;
+    if (computerGuess == "s") {$('#message1').text("You Win! Rock smashes Scissors."); user.winsVScomp++;}
+    if (computerGuess == "b") {$('#message1').text("You Win! Rock crushes Batman."); user.winsVScomp++;}
+    if (computerGuess == "l") {$('#message1').text("You Win! Rock smashes Lizard."); user.winsVScomp++;}
+    if (computerGuess == "p") {$('#message1').text("You Lose! Paper covers Rock."); user.compWins++;}
+    if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy smokes Rock."); user.compWins++;}
+    if (computerGuess == "k") {$('#message1').text("You Lose! Spock vaporizes Rock."); user.compWins++;}
+  }
+
+  if (user.choice == "p") {user.paper++;
+    if (computerGuess == "b") {$('#message1').text("You Win! Paper (money) spoils Batman."); user.winsVScomp++;}
+    if (computerGuess == "k") {$('#message1').text("You Win! Paper disproves Spock."); user.winsVScomp++;}
+    if (computerGuess == "r") {$('#message1').text("You Win! Paper covers Rock."); user.winsVScomp++;} 
+    if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy smokes Paper."); user.compWins++;} 
+    if (computerGuess == "s") {$('#message1').text("You Lose! Scissors cuts Paper."); user.compWins++;}
+    if (computerGuess == "l") {$('#message1').text("You Lose! Lizard eats Paper."); user.compWins++;}
+  }
+
+  if (user.choice == "s") {user.scissors++;
+    if (computerGuess == "o") {$('#message1').text("You Win! Scissors dehair Ozzy."); user.winsVScomp++;}
+    if (computerGuess == "l") {$('#message1').text("You Win! Scissors decapitates Lizard."); user.winsVScomp++;}
+    if (computerGuess == "p") {$('#message1').text("You Win! Scissors cuts paper."); user.winsVScomp++;} 
+    if (computerGuess == "r") {$('#message1').text("You Lose! Rock smashes Scissors."); user.compWins++;}  
+    if (computerGuess == "b") {$('#message1').text("You Lose! Batman deflects Scissors."); user.compWins++;}
+    if (computerGuess == "k") {$('#message1').text("You Lose! Spock smashes Scissors."); user.compWins++;}
+  }
+
+  if (user.choice == "b") {user.batman++;
+    if (computerGuess == "o") {$('#message1').text("You Win! Batman decapitates Ozzy."); user.winsVScomp++;} 
+    if (computerGuess == "k") {$('#message1').text("You Win! Batman outvoices Spock."); user.winsVScomp++;} 
+    if (computerGuess == "s") {$('#message1').text("You Win! Batman deflects Scissors."); user.winsVScomp++;} 
+    if (computerGuess == "l") {$('#message1').text("You Lose! Lizard poisons Batman."); user.compWins++;}
+    if (computerGuess == "r") {$('#message1').text("You Lose! Rock crushes Batman."); user.compWins++;}
+    if (computerGuess == "p") {$('#message1').text("You Lose! Paper (money) spoils Batman."); user.compWins++;}
+  }
+
+  if (user.choice == "o") {user.ozzy++;
+    if (computerGuess == "l") {$('#message1').text("You Win! Ozzy decapitates lizard."); user.winsVScomp++;}
+    if (computerGuess == "r") {$('#message1').text("You Win! Ozzy smokes Rock."); user.winsVScomp++;}
+    if (computerGuess == "p") {$('#message1').text("You Win! Ozzy smokes Paper."); user.winsVScomp++;} 
+    if (computerGuess == "k") {$('#message1').text("You Lose! Spock outsmarts Ozzy."); user.compWins++;} 
+    if (computerGuess == "s") {$('#message1').text("You Lose! Scissors dehair Ozzy."); user.compWins++;} 
+    if (computerGuess == "b") {$('#message1').text("You Lose! Batman decapitates Ozzy."); user.compWins++;} 
+  }
+
+  if (user.choice == "l") {user.lizard++;
+    if (computerGuess == "p") {$('#message1').text("You Win! Lizard eats Paper."); user.winsVScomp++;}
+    if (computerGuess == "b") {$('#message1').text("You Win! Lizard poisons Batman."); user.winsVScomp++;} 
+    if (computerGuess == "k") {$('#message1').text("You Win! Lizard poisons Spock."); user.winsVScomp++;}  
+    if (computerGuess == "r") {$('#message1').text("You Lose! Rock smashes Lizard."); user.compWins++;}
+    if (computerGuess == "s") {$('#message1').text("You Lose! Scissors decapitate Lizard."); user.compWins++;}
+    if (computerGuess == "o") {$('#message1').text("You Lose! Ozzy decapitates Lizard."); user.compWins++;} 
+  }
+
+  if (user.choice == "k") {user.spock++;
+    if (computerGuess == "r") {$('#message1').text("You Win! Spock vaporizes Rock."); user.winsVScomp++;}
+    if (computerGuess == "s") {$('#message1').text("You Win! Spock smashes Scissors."); user.winsVScomp++;} 
+    if (computerGuess == "o") {$('#message1').text("You Win! Spock outsmarts Ozzy."); user.winsVScomp++;}  
+    if (computerGuess == "p") {$('#message1').text("You Lose! Paper disproves Spock."); user.compWins++;}
+    if (computerGuess == "b") {$('#message1').text("You Lose! Batman outvoices Spock."); user.compWins++;}
+    if (computerGuess == "l") {$('#message1').text("You Lose! Lizard poisons Spock."); user.compWins++;} 
+  }
+
+  $('#user').text(`${user.displayName}: ${user.winsVScomp}`);
+  $('#opponent').text(`Computer: ${user.compWins}`);
+
+  // setTimeout(function() {
+    if (user.player == "1") {
+      database.ref().child("/players/player1").set(user);
+      //.once should go here for opponent
+    } else {
+      database.ref().child("/players/player2").set(user);
+    }
+  // }, 4000);
+  database.ref().child("/users/" + user.name).set(user);
+}
+
+//.................................................
+// Comparison for Multiplayer Mode
+//.................................................
+
+function compareMulti() {
   buttonsEnabled = false;
   $('.weapon').removeClass('pointer');
   $('.p2-weapon img').attr('src', $(`[data-key=${opponent.choice}]`).attr('src'));
@@ -585,17 +604,17 @@ function compare() {
   }
 
   $('#user').text(`${user.displayName}: ${user.wins}`);
-  $('#opponent').text(`${opponent.displayName}: ${opponent.wins}`);
+  $('#opponent').text(`${opponent.displayName}: ${opponent.wins}`); // doesn't actually
 
   user.choice = "";
 
-  setTimeout(function() {
+  // setTimeout(function() {
     if (user.player == "1") {
       database.ref().child("/players/player1").set(user);
     } else {
       database.ref().child("/players/player2").set(user);
     }
-  }, 4000);
+  // }, 4000);
 
   database.ref().child("/users/" + user.name).set(user);
 
