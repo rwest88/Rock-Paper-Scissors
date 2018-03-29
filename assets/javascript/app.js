@@ -172,12 +172,6 @@ database.ref("/players/").on("value", function(snapshot) {
       $('.p2-weapon img').attr('src', "assets/images/qm.png");
       $('#user').text(`${user.displayName}: ${user.wins}`).addClass('pointer');
       $('#opponent').text(`${opponent.displayName}: ${opponent.wins}`).addClass('pointer');
-      // user.choice = "";
-      // if (user.player == "1") {
-      //   database.ref().child("/players/player1").set(user);
-      // } else {
-      //   database.ref().child("/players/player2").set(user);
-      // }
       setTimeout(function() {
         battle.play();
         $('#message1').text('time to game.');
@@ -211,7 +205,7 @@ database.ref("/players/").on("value", function(snapshot) {
 
 //.........................................
 //
-//  Click Handlers ( and keydown handlers )
+// Click Handlers ( and keydown handlers )
 //
 //.........................................
 
@@ -620,3 +614,21 @@ function compareMulti() {
 
   countEnabled = true;
 }
+
+//......................................
+// future development
+//......................................
+// 
+// a chatbox *maybe*
+// buttons disable after first mover chooses (medium-hard)
+// UI for stats (with nice organization (most and least chosen)) (hard)
+// clickable rules map (hard)
+// a leaderboard *maybe* (win-lose ratio) (hard)
+// show 'please wait, a game is in progress' when appropriate (easy)
+// when one user logs out, the other's wins and losses get cleared (use opponent.wins) (easy)
+// fix console error on double-exit
+// cleaner buttons (hard)
+// better timeouts (hard)
+// cleaner code? (very hard)
+// 
+// ....................................
