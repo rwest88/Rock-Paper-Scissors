@@ -412,7 +412,7 @@ function countItOff() {
     $('.p2-weapon img').attr('src', "assets/images/qm.png");
     setTimeout(function() {
       $('#message1').text('rock...');
-      $('#message2').text('Fuck it up!');
+      $('#message2').text('wait for it...');
     }, 3000);
     setTimeout(function() {
       $('#message1').text('rock...');
@@ -602,17 +602,19 @@ function compareMulti() {
 
   user.choice = "";
 
-  // setTimeout(function() {
+  setTimeout(function a() {
     if (user.player == "1") {
       database.ref().child("/players/player1").set(user);
     } else {
       database.ref().child("/players/player2").set(user);
     }
-  // }, 4000);
+  }, 7000);
 
   database.ref().child("/users/" + user.name).set(user);
 
   countEnabled = true;
+
+  
 }
 
 //......................................
