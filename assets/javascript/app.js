@@ -602,19 +602,17 @@ function compareMulti() {
 
   user.choice = "";
 
-  setTimeout(function a() {
+  // setTimeout(function a() {
     if (user.player == "1") {
       database.ref().child("/players/player1").set(user);
     } else {
       database.ref().child("/players/player2").set(user);
     }
-  }, 7000);
+  // }, 7000);
 
   database.ref().child("/users/" + user.name).set(user);
 
   countEnabled = true;
-
-  
 }
 
 //......................................
