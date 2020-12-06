@@ -1,5 +1,6 @@
 # Rock-Paper-Scissors
-boot camp week 3 and week 7
+
+Deployed: https://rwest88.github.io/Rock-Paper-Scissors/
 
 A unique twist on the classic scenarios.  Seven choices.  Due credit to 'The Big Bang Theory' for adding Lizard and Spock.
 
